@@ -357,6 +357,8 @@ interface InvoiceInterface
 
     public function getPaymentSubtotals();
 
+    public function getBitcoinAddress();
+
     /**
     * Equivalent to price for each supported transactionCurrency, excluding minerFees.
     * The key is the currency and the value is an amount indicated in the smallest possible unit

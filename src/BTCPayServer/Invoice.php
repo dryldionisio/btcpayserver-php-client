@@ -102,7 +102,7 @@ class Invoice implements InvoiceInterface
      */
     protected $exceptionStatus;
 
-    
+
      /**
      * @var
      */
@@ -733,6 +733,11 @@ class Invoice implements InvoiceInterface
         return $this->refundAddresses;
     }
 
+    public function getBitcoinAddress()
+    {
+        return $this->bitcoinAddress;
+    }
+
     /**
      * @param array $refundAddress
      *
@@ -742,6 +747,15 @@ class Invoice implements InvoiceInterface
     {
         if (!empty($refundAddresses)) {
             $this->refundAddresses = $refundAddresses;
+        }
+
+        return $this;
+    }
+
+    public function setBitcoinAddress($address)
+    {
+        if (!empty($address)) {
+            $this->bitcoinAddress = $address;
         }
 
         return $this;
@@ -779,7 +793,7 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @param 
+     * @param
      * @return InvoiceInterface
      */
     public function setPaymentSubtotals($paymentSubtotals)
@@ -800,7 +814,7 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @param 
+     * @param
      * @return InvoiceInterface
      */
     public function setPaymentTotals($paymentTotals)

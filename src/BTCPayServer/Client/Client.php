@@ -125,6 +125,7 @@ class Client implements ClientInterface
             ->setId($data['id'])
             ->setAmountPaid(array_key_exists('amountPaid', $data) ? $data['amountPaid'] : '')
             ->setExceptionStatus($data['exceptionStatus'])
+            ->setBitcoinAddress($data['bitcoinAddress'])
             ->setRefundAddresses(array_key_exists('refundAddresses', $data) ? $data['refundAddresses'] : '')
             ->setTransactionCurrency(array_key_exists('transactionCurrency', $data) ? $data['transactionCurrency'] : null)
             ->setPaymentTotals(array_key_exists('paymentTotals', $data) ? $data['paymentTotals'] : '')
@@ -185,6 +186,7 @@ class Client implements ClientInterface
         $this->response = $this->sendRequest($request);
 
         $body = $this->parseResponse();
+
         $data = $body['data'];
 
         $invoice = $this->fillInvoiceData($invoice, $data);
@@ -638,14 +640,6 @@ class Client implements ClientInterface
         $host = parse_url($this->uri,PHP_URL_HOST);
         $port = parse_url($this->uri,PHP_URL_PORT);
         $scheme = parse_url($this->uri,PHP_URL_SCHEME);
-
-        if($port === null){
-            if($scheme === 'http'){
-                $port = 80;
-            }elseif($scheme === 'https'){
-                $port = 443;
-            }
-        }
 
         $request->setHost($host);
         $request->setPort($port);
